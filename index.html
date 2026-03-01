@@ -176,3 +176,56 @@
         <button class="btn-close" onclick="cerrarModal()">Empezar ahora</button>
     </div>
 </div>
+<div class="bank-info">
+            <strong>Transferencia Bancaria:</strong><br>
+            Banco Industrial (Bi)<br>
+            <strong>Cuenta de Ahorros: 1490190</strong><br>
+            A nombre de: <strong>Fuentes Orozco Josue David</strong>
+        </div>
+
+        <p style="text-align: center; font-size: 0.65rem; font-weight: bold; color: #666; margin-bottom: 10px;">PAGAR DESDE LA APP:</p>
+        <div class="bank-apps">
+            <a href="https://www.bi.com.gt/bi-en-linea" target="_blank">
+                <img src="https://logodownload.org/wp-content/uploads/2019/08/banco-industrial-logo.png" alt="Bi App">
+            </a>
+            <a href="https://www.banrural.com.gt/" target="_blank">
+                <img src="https://logodownload.org/wp-content/uploads/2019/08/banrural-logo.png" alt="Banrural">
+            </a>
+        </div>
+
+        <p style="text-align: center; font-size: 0.8rem; color: var(--azul); font-weight: bold; margin-bottom: 5px;">
+            <i class="fas fa-receipt"></i> Al finalizar, envía tu comprobante:
+        </p>
+
+        <button class="btn-pagar" onclick="enviarWhatsApp()">
+            <i class="fab fa-whatsapp"></i> ENVIAR COMPROBANTE POR WHATSAPP
+        </button>
+    </div>
+</div>
+
+<script>
+    // ... (Se mantienen las funciones anteriores) ...
+
+    function enviarWhatsApp() {
+        const cliente = document.getElementById('nombreCliente').value.trim();
+        const numeroWA = "50250667542"; 
+
+        if (!cliente) {
+            alert("Por favor, ingresa tu nombre para completar el pedido.");
+            return;
+        }
+        if (carrito.length === 0) {
+            alert("Selecciona al menos un servicio para continuar.");
+            return;
+        }
+
+        const listaWA = carrito.map(i => `- ${i.nombre} (Q${i.precio})`).join('%0A');
+        const mensaje = `*PEDIDO NUEVO - NEXUS AGENCY*%0A%0A` +
+                        `*Cliente:* ${cliente}%0A` +
+                        `*Servicios:*%0A${listaWA}%0A%0A` +
+                        `*TOTAL:* Q${total}%0A%0A` +
+                        `_Adjunto mi comprobante de transferencia. Muchas gracias por seguirme, espero mi asesoría._`;
+
+        window.open(`https://wa.me/${numeroWA}?text=${mensaje}`, '_blank');
+    }
+</script>
